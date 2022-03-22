@@ -1,0 +1,60 @@
+.Footer {
+    margin-bottom: -10px;
+    background-color: rgb(17, 17, 24);
+    color: aliceblue;
+}
+
+.Footer-hijo {
+    width: 80%;
+    margin: auto;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.Footer-hijo .razon-social {
+    text-align: center;
+}
+
+.razon-social h4 {
+    letter-spacing: 5px;
+}
+
+.razon-social h5 {
+    font-weight: lighter;
+    letter-spacing: 2px;
+}
+
+.razon-social h6{
+    font-weight: lighter;
+}
+
+.razon-social img {
+    height: 120px;
+    margin-bottom: 10px;
+}
+
+.redes {
+    padding-top: 30px;
+    width: 500px;
+}
+
+.redes div {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.redes a{
+    text-decoration: none;
+    color: aliceblue;
+    display: inline-block;
+    margin-left: 10px;
+}
+
+.redes i{
+    font-size: 30px;
+}

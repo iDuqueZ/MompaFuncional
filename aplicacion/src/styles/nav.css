@@ -1,0 +1,53 @@
+.barra-nav {
+    width: 100%;
+    background-color: #F8B540;
+    height: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: fixed;
+    z-index: 4;
+}
+
+nav {
+    width: 90%;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.links {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.links a{
+    text-decoration: none;
+    color: rgb(43, 42, 42);
+    width: auto;
+    margin: 8px;
+    display: inline-block;
+    text-align: center;
+    font-weight: 460;
+}
+
+.logo h3{
+    font-weight: bold;
+    font-size: 25px;
+    margin: auto;
+    vertical-align: center;
+}
+
+.logo .imglogo {
+    width: 40px;
+    height: 40px;
+}
+
+.logo {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 150px;
+}

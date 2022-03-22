@@ -1,0 +1,57 @@
+.carousel-item{
+    height: 90vh;
+    
+}
+.carousel-item::before{
+    content:'';
+	position: absolute;
+        top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background-color: rgba(0,0,0,0.6);
+}
+
+
+.trans {
+    position: absolute;
+    width: 100%;
+    z-index: 2;
+    bottom: -30px;
+}
+
+.Titulo {
+    z-index: 3;
+    position: absolute;
+    top: 150px;
+    left: 5%;
+    color: white;
+    width: 90%;
+}
+
+.Titulo h1 {
+    font-size: 54px;
+    font-weight: bold;
+}
+
+.Titulo h3 {
+    font-size: 24px;
+}
+
+.Titulo .button {
+    cursor: pointer;
+    background-color: #F8B540;
+    font-weight: bold;
+    padding: 10px;
+    width: 150px;
+    text-align: center;
+    margin-top: 15px;
+    border-radius: 10px;
+    color: rgb(14, 14, 14);
+    position: relative;
+}
+
+.button:hover{
+    background-color: #fda917;
+}
+

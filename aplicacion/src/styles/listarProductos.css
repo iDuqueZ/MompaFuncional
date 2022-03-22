@@ -1,0 +1,13 @@
+.contenido {
+    padding-top: 100px;
+    min-height: 100vh;
+    width: 90%;
+    margin: auto;
+}
+
+.contenido h1 {
+    font-weight: bold;
+    background-color: aquamarine;
+    width: 70%;
+    margin: auto;
+}

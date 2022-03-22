@@ -1,0 +1,88 @@
+.contInicio{
+    position: relative;
+    z-index: 3;
+    
+}
+
+.contInicio h3{
+    font-weight: bold;
+}
+
+.somos {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 80%;
+    margin: auto;
+    margin-bottom: 60px;
+}
+
+.somos .article {
+    width: 70%;
+}
+
+.somos p {
+    margin-top: 50px;
+    font-size: 20px;
+}
+
+.ilustracion {
+    height: 140px;
+}
+
+.ilustracion img{
+    height: 350px;
+}
+
+.Eventos{
+    width: 80%;
+    margin: auto;
+}
+
+.cajon-event {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.card {
+    width: 18rem;
+}
+
+.Publicidad {
+    background-color: #F8B540;
+}
+
+.Publicidad article {
+    width: 80%;
+    margin: auto;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.Publicidad article .texto{
+    width: 500px;
+    padding-top: 20px;
+}
+
+.Publicidad article .texto h3{
+    font-size: 50px;
+}
+
+.Publicidad img{
+    width: 500px;
+    border-radius: 5px;
+    -webkit-box-shadow: 7px 9px 24px -9px rgba(0,0,0,0.57);
+-moz-box-shadow: 7px 9px 24px -9px rgba(0,0,0,0.57);
+box-shadow: 7px 9px 24px -9px rgba(0,0,0,0.57);
+}
+
+.Publicidad p {
+    margin-top: 30px;
+    font-size: 20px;
+}
