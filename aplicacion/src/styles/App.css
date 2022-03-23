@@ -1,6 +1,5 @@
 .carousel-item{
-    height: 90vh;
-    
+    height: 600px;
 }
 .carousel-item::before{
     content:'';
