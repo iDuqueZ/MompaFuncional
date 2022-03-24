@@ -1,13 +1,49 @@
 .contenido {
-    padding-top: 100px;
+    padding-top: 80px;
     min-height: 100vh;
     width: 90%;
     margin: auto;
 }
 
-.contenido h1 {
+.contenido-hijo {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.contenido h2 {
     font-weight: bold;
-    background-color: aquamarine;
-    width: 70%;
+    text-align: right;
+    width: 100%;
     margin: auto;
+    margin-bottom: 15px;
+}
+
+.cajon {
+    width: 84%;
+    height: 70vh;
+    overflow-y: auto;
+    padding: 10px;
+}
+
+.cajon::-webkit-scrollbar{
+    width: 8px;     /* Tamaño del scroll en vertical */
+    height: 8px;    /* Tamaño del scroll en horizontal */
+    /* display: none; */
+}
+
+.cajon::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 4px;
+}
+
+/* Cambiamos el fondo y agregamos una sombra cuando esté en hover */
+.cajon::-webkit-scrollbar-thumb:hover {
+    background: #b3b3b3;
+    box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+/* Cambiamos el fondo cuando esté en active */
+.cajon::-webkit-scrollbar-thumb:active {
+    background-color: #999999;
 }

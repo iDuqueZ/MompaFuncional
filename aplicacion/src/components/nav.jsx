@@ -3,17 +3,23 @@ import '../styles/nav.css'
 import imglogo from '../logo.png'
 
 function Nav(){
+    function home(e) {
+        e.preventDefault();
+        window.location.href="/";
+    }
+
+
     return( 
         <div className="barra-nav">
             <nav>
-                <div className="logo">
+                <div className="logo" onClick={home}>
                     <img className="imglogo" src={imglogo} alt="logo" />
                     <h3>MOMPA</h3>
                 </div>
                 <div className="links">
                     <div>
                         <a href="/">Inicio</a>
-                        <a href="/productos">Productos</a>
+                        <a href="/productos.html">Productos</a>
                         <a href="index.html">Servicios</a>
                         <a href="index.html">Nosotros</a>
                     </div>

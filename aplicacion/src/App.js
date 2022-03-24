@@ -10,6 +10,7 @@ function App() {
   return (
       <Router>
         <Route path= '/' exact component={Inicio} />
+        <Route path='/productos.html' exact component={ListarProductos} />
         <Route path='/productos' exact component={ListarProductos} />
         <Footer/>
       </Router>
