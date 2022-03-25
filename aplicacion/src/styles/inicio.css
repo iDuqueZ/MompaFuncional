@@ -14,7 +14,7 @@
     justify-content: space-between;
     width: 80%;
     margin: auto;
-    margin-bottom: 60px;
+    margin-bottom: 80px;
 }
 
 .somos .article {
@@ -27,11 +27,13 @@
 }
 
 .ilustracion {
-    height: 140px;
+    height: 350px;
+    margin-right: 5%;
 }
 
 .ilustracion img{
-    height: 350px;
+    object-fit: cover;
+    height: 26rem;
 }
 
 .Eventos{
@@ -48,7 +50,7 @@
 }
 
 .card {
-    width: 18rem;
+    width: 20rem;
 }
 
 .Publicidad {
@@ -66,7 +68,7 @@
 }
 
 .Publicidad article .texto{
-    width: 500px;
+    width: 36rem;
     padding-top: 20px;
 }
 

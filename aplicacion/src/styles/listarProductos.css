@@ -1,5 +1,5 @@
 .contenido {
-    padding-top: 80px;
+    padding-top: 6.5rem;
     min-height: 100vh;
     width: 90%;
     margin: auto;
@@ -9,6 +9,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    margin-top: 15px;
 }
 
 .contenido h2 {
@@ -16,13 +17,14 @@
     text-align: right;
     width: 100%;
     margin: auto;
-    margin-bottom: 15px;
+    margin-bottom: 5px;
 }
 
 .cajon {
     width: 84%;
     height: 70vh;
     overflow-y: auto;
+    overflow-x: hidden;
     padding: 10px;
 }
 
