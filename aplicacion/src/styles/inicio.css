@@ -28,10 +28,12 @@
 
 .ilustracion {
     height: 350px;
+    margin-right: 5%;
 }
 
 .ilustracion img{
     object-fit: cover;
+    height: 26rem;
 }
 
 .Eventos{
@@ -66,7 +68,7 @@
 }
 
 .Publicidad article .texto{
-    width: 500px;
+    width: 36rem;
     padding-top: 20px;
 }
 
