@@ -1,5 +1,5 @@
 const AdminCtrl = {}
-const Admin= require('../models/Admin.route')
+const Admin= require('../models/Admin')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 
@@ -30,6 +30,34 @@ AdminCtrl.crearAdmin = async(req,res)=>{
             token
         })
 
+    }
+}
+
+
+AdminCtrl.login= async(req,res)=>{
+
+    const {user,contrasena} = req.body
+    const admin = await Admin.findOne({user:user})
+    if(!admin){
+        return res.json({
+            mensaje: 'Usuario incorrecto'
+        })
+    }
+
+    const match = await bcrypt.compare(contrasena,admin.contrasena)
+    if(match){
+        const token = jwt.sign({_id:admin._id}, 'Secreta')
+        res.json ({
+            mensaje: 'Bienvenido',
+            id: admin._id,
+            user: admin.user,
+            token
+        })
+    }
+    else{
+        res.json({
+            mensaje: 'Contraseña incorrecta'
+        })
     }
 }
 
