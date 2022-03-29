@@ -1,18 +1,13 @@
-import React, {useState} from 'react'
+import React from 'react'
 import BasicList from './basicList'
 import Nav from './nav'
 import '../styles/listarProductos.css'
 import Productos from './Productos'
 import Divider from '@mui/material/Divider';
 import Footer from './Footer'
-// import Axios from 'axios'
-// import Swal from 'sweetalert2'
+
 
 export default function ListarProductos() {
-
-    // const [name, setName] = useState ('');
-    // const [precio, setPrecio] = useState('');
-    // const [categoria, setCategoria] = useState('')
 
 
     return (
