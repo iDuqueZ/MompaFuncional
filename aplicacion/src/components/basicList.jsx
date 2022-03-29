@@ -8,13 +8,12 @@ import ListItemText from '@mui/material/ListItemText';
 import {GiLargeDress, GiHairStrands, GiDropEarrings, GiWinterHat, GiRolledCloth} from  'react-icons/gi';
 import {FaTshirt} from  'react-icons/fa';
 import {BsSunglasses, BsFillSuitHeartFill} from 'react-icons/bs'
-// import {GiLargeDress} from  'react-icons/gi';
-// import {GiLargeDress} from  'react-icons/gi';
+
 
 
 
 export default function BasicList() {
-  const [selectedIndex, setSelectedIndex] = React.useState(1);
+  const [selectedIndex, setSelectedIndex] = React.useState(0);
 
   const handleListItemClick = (event, index) => {
     setSelectedIndex(index);

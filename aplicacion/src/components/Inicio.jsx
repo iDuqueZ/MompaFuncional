@@ -2,6 +2,7 @@ import React from 'react'
 import Nav from './nav'
 import Carrusel from './carrusel'
 import ContInicio from './ContInicio'
+import Footer from './Footer'
 
 export default function Inicio() {
   return (
@@ -9,6 +10,7 @@ export default function Inicio() {
         <Nav />
         <Carrusel />
         <ContInicio />
+        <Footer/>
     </div>
   )
 }
