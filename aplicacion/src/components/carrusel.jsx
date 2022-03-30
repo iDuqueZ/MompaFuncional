@@ -2,6 +2,13 @@ import React from "react";
 
 
 function Carrusel (){
+
+    function ver(e){
+        e.preventDefault();
+        window.location.href="/producto/listar";
+    }
+
+
     return (
         <div id="carouselExampleFade" className="carousel slide carousel-fade" data-bs-ride="carousel">
             <div className="carousel-inner">
@@ -18,7 +25,7 @@ function Carrusel (){
             <div className="Titulo">
                 <h1>Bienvenido a nuestra tienda virtual</h1>
                 <h3>¡Aquí encontraras todos los productos que MOMPA tiene para tí!</h3>
-                <div className="button">
+                <div className="button" onClick={ver}>
                     Ver Productos
                 </div>
             </div>
