@@ -49,3 +49,9 @@
 .cajon::-webkit-scrollbar-thumb:active {
     background-color: #999999;
 }
+
+
+.Card:hover {
+    cursor: pointer;
+    width: 16rem;
+}
