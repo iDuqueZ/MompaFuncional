@@ -4,10 +4,12 @@ const Producto = require('../models/Producto')
 
 PedidoCtrl.crear = async(req,res) => {
 
-    const {name, direccion, telefono, fecha, estado, producto, pagado} = req.body
+    const {name, direccion, ciudad, correo, telefono, fecha, estado, producto, pagado} = req.body
     const NuevoPedio = new Pedido ({
         name,
         direccion,
+        ciudad,
+        correo,
         telefono,
         fecha,
         estado,

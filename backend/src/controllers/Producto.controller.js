@@ -4,15 +4,17 @@ const Producto = require('../models/Producto')
 
 ProductoCtrl.crear= async(req,res)=> {
 
-    const {name, precio, categoria, estado, descripcion, cantidad}= req.body
+    const {name, precio, imagen, categoria, estado, descripcion, cantidad, linkCompra}= req.body
     const NuevoProducto = new Producto({
 
         name,
         precio,
+        imagen,
         categoria,
         estado,
         descripcion,
-        cantidad
+        cantidad,
+        linkCompra
     })
 
     const respuesta = await NuevoProducto.save()
