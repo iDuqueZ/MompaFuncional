@@ -1,0 +1,108 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.grande {
+    overflow-y: hidden;
+}
+
+.encabezado {
+    background-color: #F8B540;
+    text-align: center;
+    font-weight: bold;
+    height: 40px;
+    margin-bottom: 0px;
+}
+
+.gran-contenedor{
+    display: flex;
+    flex-direction: row;
+    background-color: rgba(226, 226, 226, 0.4);
+}
+
+.menu{
+    /* background-color: #F8B540; */
+    width: 200px;
+}
+
+
+.cajones{
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    margin: auto;
+    overflow-y: auto;
+}
+
+.cajon-superior{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    height: 50%;
+    width: 90%;
+    margin: auto;
+    margin-top: 0px;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 20px;
+    justify-content: space-between;
+}
+
+.grafica{
+    padding: 20px;
+    border-radius: 10px;
+    background-color: white;
+    width: 60%;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.datos{
+    background-color: white;
+    border-radius: 10px;
+    text-align: center;
+    padding: 20px;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.cajon-inferior{
+    padding: 10px;
+    border-radius: 10px;
+    background-color: white;
+    height: auto;
+    width: 90%;
+    margin: auto;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.datos h4{
+    font-size: 3vh;
+}
+
+.cajones2{
+    height: 100vh;
+    width: 100%;
+    padding-top: 40px;
+}
+
+.boton{
+    background-color: #F8B540;
+    width: 100%;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    text-align: center;
+    font-weight: 800;
+    color: white;
+    cursor: pointer;
+}
+
+.boton:hover{
+    background-color: #a06601;
+}
+
+.card-body div{
+    margin-top: 5px;
+    margin-bottom: 5px;
+}

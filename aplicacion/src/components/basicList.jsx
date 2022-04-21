@@ -10,8 +10,6 @@ import {FaTshirt} from  'react-icons/fa';
 import {BsSunglasses, BsFillSuitHeartFill} from 'react-icons/bs'
 
 
-
-
 export default function BasicList() {
   const [selectedIndex, setSelectedIndex] = React.useState(0);
 
