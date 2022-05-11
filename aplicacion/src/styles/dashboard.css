@@ -3,29 +3,9 @@
     padding: 0;
 }
 
-.grande {
-    overflow-y: hidden;
+.nav {
+    width: 100%;
 }
-
-.encabezado {
-    background-color: #F8B540;
-    text-align: center;
-    font-weight: bold;
-    height: 40px;
-    margin-bottom: 0px;
-}
-
-.gran-contenedor{
-    display: flex;
-    flex-direction: row;
-    background-color: rgba(226, 226, 226, 0.4);
-}
-
-.menu{
-    /* background-color: #F8B540; */
-    width: 200px;
-}
-
 
 .cajones{
     display: flex;
@@ -78,7 +58,8 @@
 }
 
 .datos h4{
-    font-size: 3vh;
+    width: 300px;
+    font-size: 5vh;
 }
 
 .cajones2{

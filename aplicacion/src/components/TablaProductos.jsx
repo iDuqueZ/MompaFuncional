@@ -14,6 +14,10 @@ export default function DataTable() {
 
     const handleClose = () => setShow(false);
 
+    const [show2, setShow2] = useState(false);
+
+    const handleClose2 = () => setShow2(false);
+
     const [producto, setproducto] = useState([]);
     const [idproducto, setidProducto]= useState('');
     const [name, setname]= useState('');
@@ -104,6 +108,15 @@ export default function DataTable() {
             })
         }
 
+        else if(precio < 0){
+            Swal.fire({
+                icon: 'error',
+                title: 'El precio no debe ser menor a cero',
+                showConfirmButton: false,
+                timer: '1500'
+            })
+        }
+
         else if(imagen === ""){
             Swal.fire({
                 icon: 'error',
@@ -139,6 +152,15 @@ export default function DataTable() {
                 timer: '1500'
             })
         }
+
+        else if(cantidad < 0){
+            Swal.fire({
+                icon: 'error',
+                title: 'La cantidad no puede ser menor a 0',
+                showConfirmButton: false,
+                timer: '1500'
+            })
+        }
         
         else{
             const respuesta = await axios.put('/producto/actualizar/'+ id, producto, {
@@ -159,6 +181,37 @@ export default function DataTable() {
             setShow(false)
         }
     }
+
+    const MensajeConfirmacion =  (idParametro) => async(event)=>{
+        event.stopPropagation();
+        event.preventDefault();
+        setShow2(true);
+        setidProducto(idParametro)
+    }
+    
+    
+    const eliminar = async(event)=>{
+        event.preventDefault();
+        const id = idproducto
+        const token = sessionStorage.getItem('token')
+        const respuesta = await axios.delete('/producto/eliminar/' + id, {
+            headers : {'autorizacion': token}
+        })
+
+        const mensaje = respuesta.data.mensaje;
+            console.log(mensaje)
+            obtenerProductos();
+
+            Swal.fire({
+                icon: 'success',
+                title: mensaje,
+                showConfirmButton: false,
+                timer: '1500'
+            })
+
+            setShow2(false)
+    }
+
 
 
 const columns = [
@@ -214,7 +267,7 @@ const columns = [
             <GridActionsCellItem
               icon={<DeleteIcon />}
               label="Delete"
-            //   onClick={(event, id)=>eliminar(id)}
+              onClick={MensajeConfirmacion(id)}
               color="inherit"
             />,
           ];
@@ -262,7 +315,7 @@ const data = producto.map((producto)=>({
                                     <label>Categoria</label>
                                     
 
-                                    <select className='form-control required' placeholder='Digita el precio en numeros' onChange={(e)=>setcategoriaSelect(e.target.value)} value={categoria}>
+                                    <select className='form-control required' placeholder='Digita el precio en numeros' onChange={(e)=>setcategoriaSelect(e.target.value)} value={categoriaSelect}>
                                         {
                                             categoria.map(categoria =>(
                                                 <option key={categoria}>
@@ -282,7 +335,7 @@ const data = producto.map((producto)=>({
 
                                 <div className='col-md-6'>
                                     <label>Estado</label>
-                                    <select className='form-control required' placeholder='Digita el precio en numeros' onChange={(e)=>setestadoSelect(e.target.value)} value={estado}>
+                                    <select className='form-control required' placeholder='Digita el precio en numeros' onChange={(e)=>setestadoSelect(e.target.value)} value={estadoSelect}>
                                         {
                                             estado.map(estado =>(
                                                 <option key={estado}>
@@ -324,6 +377,21 @@ const data = producto.map((producto)=>({
             Save Changes
           </Button>
         </Modal.Footer>
+    </Modal>
+    
+    <Modal show={show2} onHide={handleClose2}>
+    <Modal.Header closeButton>
+        <Modal.Title>Eliminar</Modal.Title>
+    </Modal.Header>
+
+    <Modal.Body>
+        <p>¿Estas seguro que deseas eliminar este producto?</p>
+    </Modal.Body>
+
+    <Modal.Footer>
+        <Button variant="secondary" onClick={handleClose2}>Cancelar</Button>
+        <Button variant="primary" onClick={eliminar}>Confirmar</Button>
+    </Modal.Footer>
     </Modal>
     </div>
   );

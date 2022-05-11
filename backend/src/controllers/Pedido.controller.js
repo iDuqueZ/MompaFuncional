@@ -1,6 +1,5 @@
 const PedidoCtrl = {}
 const Pedido = require('../models/Pedido')
-const Producto = require('../models/Producto')
 
 PedidoCtrl.crear = async(req,res) => {
 
@@ -18,7 +17,7 @@ PedidoCtrl.crear = async(req,res) => {
     })
 
     const pagoPedido = NuevoPedio.pagado;
-    if(pagado){
+    if(pagoPedido){
         const respuesta = await NuevoPedio.save()
 
             res.json ({
@@ -36,9 +35,13 @@ PedidoCtrl.crear = async(req,res) => {
 PedidoCtrl.listar = async (req,res) =>{
 
     const respuesta = await Pedido.find()
-    res.json({
-        respuesta,
-    })
+    res.json(respuesta)
+}
+
+PedidoCtrl.listarId= async(req,res)=>{
+    const id = req.params.id
+    const respuesta = await Pedido.findById({_id: id})
+    res.json(respuesta)
 }
 
 PedidoCtrl.actualizar = async (req,res)=> {
@@ -56,6 +59,30 @@ PedidoCtrl.eliminar = async(req,res)=> {
     res.json({
         mensaje: 'Pedido eliminado'
     })
+}
+
+PedidoCtrl.mes = async(req,res) =>{
+
+    const respuesta = await Pedido.find()
+    
+    const mes = respuesta.map(function(Nombremes) {
+        const dateObj = new Date(Nombremes.fecha);
+        return dateObj.toLocaleString("sp-CO", { month: "long" });
+      })
+
+    console.log(mes)
+
+    const infoMes = new Map();
+
+    console.log(mes[0])
+    
+    var repetidos = {};
+
+    mes.forEach(function(numero){
+    repetidos[numero] = (repetidos[numero] || 0) + 1;
+    });
+
+    res.json(repetidos)
 }
 
 module.exports = PedidoCtrl

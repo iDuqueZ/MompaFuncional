@@ -36,7 +36,7 @@ ProductoCtrl.listarId= async(req,res)=>{
 }
 
 ProductoCtrl.listarCategoria= async(req,res)=>{
-    const categoria = req.params.categoria;
+    const categoria = req.params.criterio;
     try {
         const respuesta = await Producto.find({categoria: categoria})
         res.json(respuesta)

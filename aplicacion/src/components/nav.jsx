@@ -19,7 +19,7 @@ function Nav(){
                 <div className="links">
                     <div>
                         <a href="/">Inicio</a>
-                        <a href="/producto/listar">Productos</a>
+                        <a href="producto/listar?categoria=vestidos">Productos</a>
                         <a href="index.html">Servicios</a>
                         <a href="index.html">Nosotros</a>
                     </div>

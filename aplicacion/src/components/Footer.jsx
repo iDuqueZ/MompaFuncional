@@ -23,7 +23,7 @@ export default function Footer() {
                     <i class='bx bxl-facebook-square'></i>  <a href='https://www.facebook.com/MOMPA-Tienda-Accesorios-431744850996086'  target="_blank" rel="noopener noreferrer" title='Facebook'> Mompa Tienda-Accesorios</a>
                 </div>
                 <div>
-                    <i class='bx bxl-whatsapp' ></i>  <a href='wa.me/message/UFML5BY7GHY5M1' target="_blank" rel="noopener noreferrer" title='Whatsapp'>314 6137166</a>
+                    <i class='bx bxl-whatsapp' ></i>  <a href='https://wa.me/message/UFML5BY7GHY5M1' target="_blank" rel="noopener noreferrer" title='Whatsapp'>314 6137166</a>
                 </div>
             </div>
         </div>

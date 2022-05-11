@@ -1,46 +1,40 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-
-const data = [
-  {
-    name: 'Page A',
-    uv: 4000,
-    amt: 2400,
-  },
-  {
-    name: 'Page B',
-    uv: 3000,
-    amt: 2210,
-  },
-  {
-    name: 'Page C',
-    uv: 2000,
-    amt: 2290,
-  },
-  {
-    name: 'Page D',
-    uv: 2780,
-    amt: 2000,
-  },
-  {
-    name: 'Page E',
-    uv: 1890,
-    amt: 2181,
-  },
-  {
-    name: 'Page F',
-    uv: 2390,
-    amt: 2500,
-  },
-  {
-    name: 'Page G',
-    uv: 3490,
-    amt: 2100,
-  },
-];
+import axios from 'axios';
 
 export default function Grafic() {
+  const [dataMes, setDatames] = useState([])
 
+  useEffect(()=>{
+    obtenerMes();
+  
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[])
+  
+  const obtenerMes = async() => {
+    const token = sessionStorage.getItem('token')
+    const respuesta = await axios.get('/pedido/mes', {
+        headers : {'autorizacion': token}
+    })
+
+    setDatames(respuesta.data)
+  }
+
+
+
+  const data = [];
+  let datitos = {}
+
+  for(const [key, value] of Object.entries(dataMes)){
+    datitos = {
+      name: key,
+      cantidad: value
+    }
+
+    data.push(datitos)
+  }
+
+  
     return (
       <ResponsiveContainer width="100%" aspect={2}>
         <BarChart
@@ -59,7 +53,7 @@ export default function Grafic() {
           <YAxis />
           <Tooltip />
           <Legend />
-          <Bar dataKey="uv" fill="#82ca9d" />
+          <Bar dataKey="cantidad" fill="#005eff" />
         </BarChart>
       </ResponsiveContainer>
     );

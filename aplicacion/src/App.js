@@ -7,7 +7,10 @@ import ListarProductos from './components/ListarProductos'
 import SignIn from './components/LoginAdmin'
 import Dashboard from './components/Dashboard';
 import Inventario from './components/Inventario';
+import PaginaPedidos from './components/PaginaPedidos'
 import NuevoProducto from './components/NuevoProducto';
+import NuevoPedido from './components/NuevoPedido';
+import PagoExitoso from './components/PagoExitoso';
 
 function App() {
   return (
@@ -17,7 +20,10 @@ function App() {
         <Route path='/admin' exact component={SignIn} />
         <Route path= '/Dashboard' exact component={Dashboard} />
         <Route path= '/Inventario' exact component={Inventario} />
+        <Route path= '/Pedidos' exact component={PaginaPedidos} />
         <Route path= '/producto/nuevo' exact component={NuevoProducto} />
+        <Route path= '/pedido/nuevo' exact component={NuevoPedido} />
+        <Route path= '/pago_exitoso' exact component={PagoExitoso}/>
       </Router>
       
     

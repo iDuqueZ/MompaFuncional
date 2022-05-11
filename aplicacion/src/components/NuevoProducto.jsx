@@ -58,6 +58,15 @@ export default function NuevoProducto() {
             })
         }
 
+        else if(precio < 0){
+            Swal.fire({
+                icon: 'error',
+                title: 'Debe ingresar un precio',
+                showConfirmButton: false,
+                timer: '1500'
+            })
+        }
+
         else if(imagen === ""){
             Swal.fire({
                 icon: 'error',
@@ -89,6 +98,15 @@ export default function NuevoProducto() {
             Swal.fire({
                 icon: 'error',
                 title: 'Debe ingresar una cantidad',
+                showConfirmButton: false,
+                timer: '1500'
+            })
+        }
+
+        else if(cantidad < 0){
+            Swal.fire({
+                icon: 'error',
+                title: 'Debe ingresar un precio',
                 showConfirmButton: false,
                 timer: '1500'
             })

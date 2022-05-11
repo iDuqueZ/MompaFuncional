@@ -11,11 +11,45 @@ import {BsSunglasses, BsFillSuitHeartFill} from 'react-icons/bs'
 
 
 export default function BasicList() {
-  const [selectedIndex, setSelectedIndex] = React.useState(0);
+  const [selectedIndex, setSelectedIndex] = React.useState('');
 
   const handleListItemClick = (event, index) => {
     setSelectedIndex(index);
+
+    if(index === 0){
+      window.location.href = "/producto/listar?categoria=vestidos";
+    }
+
+    if(index === 1){
+      window.location.href = "/producto/listar?categoria=camisas";
+    }
+
+    if(index === 2){
+      window.location.href = "/producto/listar?categoria=gorros";
+    }
+
+    if(index === 3){
+      window.location.href = "/producto/listar?categoria=turbantes";
+    }
+
+    if(index === 4){
+      window.location.href = "/producto/listar?categoria=gafas";
+    }
+
+    if(index === 5){
+      window.location.href = "/producto/listar?categoria=pride";
+    }
+
+    if(index === 6){
+      window.location.href = "/producto/listar?categoria=cabello";
+    }
+
+    if(index === 7){
+      window.location.href = "/producto/listar?categoria=accesorios";
+    }
+
   };
+
 
   return (
     <Box sx={{ width: '50%', maxWidth: 360, bgcolor: 'background.paper' }}>

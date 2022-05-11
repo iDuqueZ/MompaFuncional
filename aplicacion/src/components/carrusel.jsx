@@ -5,7 +5,7 @@ function Carrusel (){
 
     function ver(e){
         e.preventDefault();
-        window.location.href="/producto/listar";
+        window.location.href="producto/listar?categoria=vestidos";
     }
 
 

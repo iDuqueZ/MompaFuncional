@@ -1,13 +1,13 @@
 import React from 'react'
 import NavBarAdmin from './NavBarAdmin';
-import TablaProductos from './TablaProductos'
+import Pedidos from './Pedidos'
 import '../styles/dashboard.css'
 
-export default function Inventario() {
+export default function PaginaPedidos() {
 
-    function nuevoProducto(e){
+    function nuevoPedido(e){
         e.preventDefault ();
-        window.location.href= "/producto/nuevo";
+        window.location.href= "/pedido/nuevo";
     }
 
     return (
@@ -20,12 +20,12 @@ export default function Inventario() {
             
             <div className='cajones2'>
                 <div className='cajon-inferior'>
-                    <h4>Lista de productos</h4>
+                    <h4>Lista de pedidos</h4>
                     <br></br>
-                    <TablaProductos/>
+                    <Pedidos/>
 
-                    <div className='boton' onClick={nuevoProducto}>
-                        <h5>Agregar nuevo producto</h5>
+                    <div className='boton' onClick={nuevoPedido}>
+                        <h5>Agregar nuevo pedido</h5>
                     </div>
                 </div>
             </div>
