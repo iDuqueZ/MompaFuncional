@@ -20,8 +20,8 @@ function Nav(){
                     <div>
                         <a href="/">Inicio</a>
                         <a href="producto/listar?categoria=vestidos">Productos</a>
-                        <a href="index.html">Servicios</a>
-                        <a href="index.html">Nosotros</a>
+                        <a href="/servicios">Servicios</a>
+                        <a href="/nosotros">Nosotros</a>
                     </div>
                 </div>
             </nav>

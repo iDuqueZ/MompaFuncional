@@ -7,7 +7,6 @@ import '../styles/dashboard.css'
 
 export default function Dashboard() {
 
-    const [dataMes, setDatames] = useState([])
     const [cantMes, setcantMes] = useState(0)
 
     useEffect(()=>{
@@ -23,11 +22,10 @@ export default function Dashboard() {
         }) 
 
         console.log(respuesta.data)
-        setDatames(respuesta.data)
-        calcularCantMes();
+        calcularCantMes(respuesta.data);
     }
 
-    const calcularCantMes = async() => {
+    const calcularCantMes = (datos) => {
 
         
         const monthNames = ["enero", "febrero", "marzo", "abril", "mayo", "junio",
@@ -41,17 +39,17 @@ export default function Dashboard() {
         let esteMes = getLongMonthName(new Date(Date.now()))
         console.log(esteMes)
 
-        let cantidad;
-
-        for(const [key, value] of Object.entries(dataMes)){
+        for(const [key, value] of Object.entries(datos)){
             if (esteMes === key){
-
-                cantidad = value
+                cambiarMes(value)
             }
         }
 
-        setcantMes(cantidad)
-        console.log()
+        
+    }
+
+    const cambiarMes = (valor) => {
+        setcantMes(valor)
     }
 
 

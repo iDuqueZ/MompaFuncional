@@ -8,9 +8,10 @@ const PedidoSchema = new Schema ({
     correo: {type:String, required: [true, 'El correo es obligatorio']},
     telefono: {type:Number, required: [true, 'El celular es obligatorio']},
     fecha: {type:Date, default:Date.now},
+    metodoPago: String,
     estado: String,
     producto: String,
-    pagado: Boolean
+    pagado: String
 })
 
 module.exports = mongoose.model('pedido', PedidoSchema)

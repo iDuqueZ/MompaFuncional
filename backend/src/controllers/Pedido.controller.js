@@ -1,9 +1,10 @@
 const PedidoCtrl = {}
 const Pedido = require('../models/Pedido')
 
+
 PedidoCtrl.crear = async(req,res) => {
 
-    const {name, direccion, ciudad, correo, telefono, fecha, estado, producto, pagado} = req.body
+    const {name, direccion, ciudad, correo, telefono, fecha, metodoPago, estado, producto, pagado} = req.body
     const NuevoPedio = new Pedido ({
         name,
         direccion,
@@ -11,25 +12,19 @@ PedidoCtrl.crear = async(req,res) => {
         correo,
         telefono,
         fecha,
+        metodoPago,
         estado,
         producto,
         pagado
     })
 
-    const pagoPedido = NuevoPedio.pagado;
-    if(pagoPedido){
+
         const respuesta = await NuevoPedio.save()
 
             res.json ({
             mensaje: 'Pedido realizado con exito',
             respuesta
         })
-    }
-    else {
-        res.json ({
-            mensaje: 'Hubo un error con el pago del producto'
-        })
-    }
 }
 
 PedidoCtrl.listar = async (req,res) =>{

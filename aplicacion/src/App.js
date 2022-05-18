@@ -11,6 +11,7 @@ import PaginaPedidos from './components/PaginaPedidos'
 import NuevoProducto from './components/NuevoProducto';
 import NuevoPedido from './components/NuevoPedido';
 import PagoExitoso from './components/PagoExitoso';
+import Pagina404 from './components/Pagina404';
 
 function App() {
   return (
@@ -23,7 +24,9 @@ function App() {
         <Route path= '/Pedidos' exact component={PaginaPedidos} />
         <Route path= '/producto/nuevo' exact component={NuevoProducto} />
         <Route path= '/pedido/nuevo' exact component={NuevoPedido} />
-        <Route path= '/pago_exitoso' exact component={PagoExitoso}/>
+        <Route path= '/pago' exact component={PagoExitoso}/>
+        <Route path= '/servicios' exact component={Pagina404}/>
+        <Route path= '/nosotros' exact component={Pagina404}/>
       </Router>
       
     

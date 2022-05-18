@@ -6,6 +6,7 @@ import axios from 'axios'
 
 export default function PagoExitoso() {
   
+    const [idProducto, setIdProducto] = useState ('');
     const [name, setname] = useState('');
     const [direccion,setdireccion] = useState('');
     const [correo,setcorreo] = useState ('');
@@ -13,14 +14,44 @@ export default function PagoExitoso() {
     const [telefono, setTelefono] = useState('');
     const [producto, setproducto] = useState('');
     const [pagado,setpagado] = useState ('');
+    const [metodoPago, setmetodoPago] = useState([]);
+    const [metodoPagoSelect, setmetodoPagoSelect] = useState('');
+    const [estado, setestado] = useState  ('');
+    const [linkCompra, setlinkCompra] = useState ('')
+    const [cantProducto, setCantProducto] = useState('');
+
   
     useEffect(()=>{
-  
-      setproducto(sessionStorage.getItem('nombreProducto'))
-  
-      setpagado(true)
+      aux()
+      
+      setpagado('En espera')
+      setmetodoPago(['Contra entrega', 'En línea'])
+      setmetodoPagoSelect('Contra entrega')
+      setestado('En preparación');
       // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
+
+    const aux = async() => {
+      const valores = window.location.search;
+      const urlParams = new URLSearchParams(valores)
+      const values = urlParams.values()
+    
+  
+      for (const value of values) {
+  
+        console.log(value)
+        const token = sessionStorage.getItem('token')
+        const respuesta = await axios.get('/producto/listar/' + value, {
+            headers : {'autorizacion': token}
+        })
+
+        console.log(respuesta.data)
+        setproducto(respuesta.data.name);
+        setIdProducto(respuesta.data._id)
+        setlinkCompra(respuesta.data.linkCompra);
+        setCantProducto(respuesta.data.cantidad)
+      }
+    }
   
     const guardar = async(e)=>{
       e.preventDefault()
@@ -30,8 +61,11 @@ export default function PagoExitoso() {
           correo,
           ciudad,
           telefono,
+          metodoPago: metodoPagoSelect,
+          estado,
           producto,
           pagado
+          
       }
       
       if(name === ""){
@@ -87,7 +121,14 @@ export default function PagoExitoso() {
           timer: '1500'
         })
       }
-  
+      else if (metodoPago === ''){
+        Swal.fire({
+          icon: 'error',
+          title: 'Debe ingresar un metodo de pago',
+          showConfirmButton: false,
+          timer: '1500'
+        })
+      }
       else {
           const token = sessionStorage.getItem('token');
           const respuesta = await axios.post('/pedido/nuevo', pedido, {
@@ -103,25 +144,47 @@ export default function PagoExitoso() {
               showConfirmButton: false,
               timer: '1500'
           })
-  
+          menosCantidad()
           e.target.reset();
-  
       }
+
+      if (metodoPagoSelect === 'En línea'){
+        console.log(linkCompra)
+        window.location.href = linkCompra;
+      }
+
+
+      
   }
   
-  
+  const menosCantidad = async() =>{
+
+    let menos = cantProducto - 1;
+    const id =  idProducto
+
+    const datos = {
+      cantidad: menos
+    }
+    const respuesta = await axios.put('/producto/actualizarEstado/'+ id, datos)
+    console.log(respuesta)
+  }
+
+  const atras = async(e) => {
+    e.preventDefault()
+    window.location.href = '/'
+}
+
     return (
       <div>
           <Nav />
           <br></br>
           <br></br>
           <br></br>
-          <Alert variant='success' style={{width: '90%', margin:'auto'}}>
-                <h4>Tu pago fue exitoso</h4>
-                <p>Completa el siguiente formulario para registrar tu pedido. Recuerda que la informacion suministrada será utilizada para enviarte el producto</p>
+          <Alert style={{width: '90%', margin:'auto'}}>
+                <h4>¡Importante!</h4>
+                <p>Completa el siguiente formulario para registrar tu pedido. Recuerda que la informacion suministrada será utilizada para enviarte el producto, si selecionas pago en línea te redireccionaremos para que realices tu pago.</p>
           </Alert>
 
-          <br></br>
           <div className='card-body'>
                 <Form onSubmit={guardar} className='row' style={{width: '90%', margin:'auto'}}>
                 <Form.Group className='col-md-6'>
@@ -144,13 +207,31 @@ export default function PagoExitoso() {
                     <Form.Label>Celular</Form.Label>
                     <Form.Control type='number' className='form-control required' placeholder='Digita el numero de celular de contacto' onChange={(e)=>setTelefono(e.target.value)}/>
                 </Form.Group>
+                <Form.Group className='col-md-6'>
+                    <Form.Label>Método de Pago</Form.Label>
+                    <Form.Select aria-label="Estado de pago" onChange={(e)=>setmetodoPagoSelect(e.target.value)} >
+                    {
+                        metodoPago.map(metodoPago =>(
+                        <option key={metodoPago}>
+                            {metodoPago}
+                        </option>
+                    ))
+                    }
+                    </Form.Select>
+                </Form.Group>
                 <Form.Group>
                     <Form.Label>Producto</Form.Label>
-                    <Form.Control type='text' className='form-control required' placeholder='Error con producto seleccioando' value={producto} readOnly/>
+                    <Form.Control type='text' className='form-control required' value={producto} readOnly/>
                 </Form.Group>
+                <Form.Group></Form.Group>
                 <Form.Group className='col-md-1'>
                     <Button type='submit' variant="primary">
                         Agregar
+                    </Button>
+                </Form.Group>
+                <Form.Group className='col-md-1'>
+                    <Button type='button' onClick={atras} variant="secondary">
+                        Volver
                     </Button>
                 </Form.Group>
                 </Form>

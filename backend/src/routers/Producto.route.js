@@ -9,6 +9,7 @@ router.get('/listar/:id', ProductoCtrl.listarId)
 router.get('/categoria/:criterio', ProductoCtrl.listarCategoria)
 router.delete('/eliminar/:id', Auth.verificarToken, ProductoCtrl.eliminar)
 router.put('/actualizar/:id', Auth.verificarToken, ProductoCtrl.actualizar)
+router.put('/actualizarEstado/:id', ProductoCtrl.actualizarEstado)
 
 
 module.exports = router

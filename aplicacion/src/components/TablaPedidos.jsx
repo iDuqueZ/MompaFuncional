@@ -36,12 +36,10 @@ export default function DataTable() {
     { field: 'correo', headerName: 'Email', width: 90, },
     { field: 'telefono', headerName: 'Celular', type: 'string', width: 90, },
     { field: 'fecha', headerName: 'Fecha', type: 'date',  width: 90,},
+    { field: 'metodoPago', headerName: 'Método', width: 90, },
     { field: 'estado', headerName: 'Estado', width: 90, },
     { field: 'producto', headerName: 'Producto', width: 90, },
-    { field: 'pagado', headerName: 'Pago', width: 90,},
-    {
-    
-  }
+    { field: 'pagado', headerName: 'Pago', width: 90,}
     
   ];
   
@@ -53,6 +51,7 @@ export default function DataTable() {
       correo: p.correo,
       telefono: p.telefono,
       fecha: p.fecha,
+      metodoPago: p.metodoPago,
       estado: p.estado,
       producto: p.producto,
       pagado: p.pagado
@@ -63,8 +62,8 @@ export default function DataTable() {
       <DataGrid
         rows={data}
         columns={columns}
-        pageSize={2}
-        rowsPerPageOptions={[2]}
+        pageSize={3}
+        rowsPerPageOptions={[3]}
       />
     </div>
   );

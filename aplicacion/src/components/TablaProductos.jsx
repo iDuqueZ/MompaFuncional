@@ -34,7 +34,7 @@ export default function DataTable() {
     useEffect(()=>{
         obtenerProductos()
 
-        setestado(['Dsiponible', 'No Disponible'])
+        setestado(['Disponible', 'No Disponible'])
         setestadoSelect('Disponible');
 
         setcategoria(['vestidos', 'camisas', 'gorros', 'turbantes', 'gafas', 'pride', 'cabello', 'accesorios'])
@@ -161,6 +161,14 @@ export default function DataTable() {
                 timer: '1500'
             })
         }
+        else if(cantidad <= 0 && estadoSelect === 'Disponible'){
+            Swal.fire({
+                icon: 'error',
+                title: 'Si la cantidad es 0 el estado no puede ser',
+                showConfirmButton: false,
+                timer: '1500'
+            })
+        }
         
         else{
             const respuesta = await axios.put('/producto/actualizar/'+ id, producto, {
@@ -215,10 +223,10 @@ export default function DataTable() {
 
 
 const columns = [
-    { field: 'id', headerName: 'ID', width: 90 },
-  { field: 'name', headerName: 'Nombre', width: 180 },
-  { field: 'categoria', headerName: 'Categoria', width: 90 },
-  { field: 'estado', headerName: 'Estado', width: 90 },
+    { field: 'id', headerName: 'ID', width: 60 },
+  { field: 'name', headerName: 'Nombre', width: 200 },
+  { field: 'categoria', headerName: 'Categoria', width: 110 },
+  { field: 'estado', headerName: 'Estado', width: 110 },
   {
     field: 'precio',
     headerName: 'Precio',
@@ -235,7 +243,7 @@ const columns = [
     field: 'descripcion',
     headerName: 'Descripcion',
     type: 'text',
-    width: 150,
+    width: 220,
   },
   {
     field: 'imagen',
@@ -245,7 +253,7 @@ const columns = [
   },
   {
     field: 'linkCompra',
-    headerName: 'Link de Compra',
+    headerName: 'L. Compra',
     type: 'text',
     width: 100,
   },
@@ -312,7 +320,7 @@ const data = producto.map((producto)=>({
                                 </div>
 
                                 <div className='col-md-6'>
-                                    <label>Categoria</label>
+                                    <label>Categoría</label>
                                     
 
                                     <select className='form-control required' placeholder='Digita el precio en numeros' onChange={(e)=>setcategoriaSelect(e.target.value)} value={categoriaSelect}>
@@ -371,10 +379,10 @@ const data = producto.map((producto)=>({
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
-            Close
+            Cerrar
           </Button>
           <Button variant="primary" onClick={actualizar}>
-            Save Changes
+            Guardar cambios
           </Button>
         </Modal.Footer>
     </Modal>

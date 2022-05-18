@@ -74,7 +74,7 @@ export default function SignIn() {
               required
               fullWidth
               id="user"
-              label="User name"
+              label="Nombre de usuario"
               name="user"
               autoComplete="user"
               autoFocus
@@ -85,7 +85,7 @@ export default function SignIn() {
               required
               fullWidth
               name="password"
-              label="Password"
+              label="Contraseña"
               type="password"
               id="password"
               autoComplete="current-password"
@@ -98,7 +98,7 @@ export default function SignIn() {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Sign In
+              Ingresar
             </Button>
             
           </Box>

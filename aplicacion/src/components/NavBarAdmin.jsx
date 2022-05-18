@@ -15,7 +15,7 @@ export default function NavBarAdmin() {
     {['xxl'].map((expand) => (
     <Navbar key={expand} variant="light" expand={expand} style={{width: "100%", backgroundColor: "#F8B540"}}>
       <Container fluid style={{width: "90%"}} >
-        <Navbar.Brand href="#">MOMPA MODO ADMINISTRADOR</Navbar.Brand>
+        <Navbar.Brand href="/dashboard"><strong>MOMPA MODO ADMINISTRADOR</strong></Navbar.Brand>
         <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
         <Navbar.Offcanvas
           id={`offcanvasNavbar-expand-${expand}`}

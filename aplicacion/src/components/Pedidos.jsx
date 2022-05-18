@@ -25,11 +25,14 @@ export default function DataTable() {
   const [ciudad, setciudad] = useState ('');  
   const [telefono, setTelefono] = useState('');
   const [fecha, setFecha] = useState('');
+  const [metodoPago, setmetodoPago] = useState([]);
+  const [metodoPagoSelect, setmetodoPagoSelect] = useState('');
   const [estado, setestado] = useState  ([]);
   const [estadoSelect, setestadoSelect] = useState  ([]);
   const [producto, setproducto] = useState([]);
   const [productoSelect, setproductoSelect] = useState([]);
-  const [pagado,setpagado] = useState ('');
+  const [pagado,setpagado] = useState ([]);
+  const [pagadoSelect,setpagadoSelect] = useState ('');
   
   useEffect(()=>{
     obtenerPedidos();
@@ -41,7 +44,10 @@ export default function DataTable() {
     setproducto(['Ninguno'])
     setproductoSelect('Ninguno')
 
-    setpagado(true)
+    setpagado(['En espera', 'Confirmado', 'Fallido'])
+    setpagadoSelect('En espera')
+
+    setmetodoPago(['Contra entrega', 'En linea'])
     // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
 
@@ -87,11 +93,14 @@ const obtenerPedido = (idParametro) => async(event)=>{
   setidpedido(respuesta.data._id);
   setname(respuesta.data.name);
   setdireccion(respuesta.data.direccion);
+  setciudad(respuesta.data.ciudad);
   setcorreo(respuesta.data.correo);
   setTelefono(respuesta.data.telefono);
   setFecha(respuesta.data.fecha);
   setestadoSelect(respuesta.data.estado);
   setproductoSelect(respuesta.data.producto);
+  setmetodoPagoSelect(respuesta.data.metodoPago);
+  setpagadoSelect(respuesta.data.pagado);
 }
 
 const actualizar = async(e)=> {
@@ -105,9 +114,10 @@ const actualizar = async(e)=> {
     correo, 
     telefono, 
     fecha,
+    metodoPago: metodoPagoSelect,
     estado: estadoSelect,
     producto: productoSelect,
-    pagado
+    pagado: pagadoSelect
   }
 
   if(name === ""){
@@ -221,12 +231,13 @@ const eliminar = async(event)=>{
     { field: 'correo', headerName: 'Email', width: 110, },
     { field: 'telefono', headerName: 'Celular', type: 'string', width: 110, },
     { field: 'fecha', headerName: 'Fecha', type: 'date',  width: 110,},
+    { field: 'metodoPago', headerName: 'Método', width: 110, },
     { field: 'estado', headerName: 'Estado', width: 110, },
     { field: 'producto', headerName: 'Producto', width: 140, },
     { field: 'pagado', headerName: 'Pago', width: 80,},
     {
     field: 'action',
-    headerName: 'Actions',
+    headerName: 'Acciones',
     type: 'actions',
     width: 90,
     cellClassName: 'actions',
@@ -259,6 +270,7 @@ const eliminar = async(event)=>{
       correo: p.correo,
       telefono: p.telefono,
       fecha: p.fecha,
+      metodoPago: p.metodoPago,
       estado: p.estado,
       producto: p.producto,
       pagado: p.pagado
@@ -305,6 +317,18 @@ const eliminar = async(event)=>{
                 <Form.Control type='date' className='form-control required' placeholder='Digita el numero de celular de contacto' onChange={(e)=>setFecha(e.target.value)} value={fecha}/>
               </Form.Group>
               <Form.Group className='col-md-6'>
+                    <Form.Label>Método de Pago</Form.Label>
+                    <Form.Select aria-label="Estado de pago" onChange={(e)=>setmetodoPagoSelect(e.target.value)} >
+                    {
+                        metodoPago.map(metodoPago =>(
+                        <option key={metodoPago}>
+                            {metodoPago}
+                        </option>
+                    ))
+                    }
+                    </Form.Select>
+                </Form.Group>
+              <Form.Group className='col-md-6'>
                 <Form.Label>Estado</Form.Label>
                 <Form.Select aria-label="Seleccionar estado" onChange={(e)=>setestadoSelect(e.target.value)} value={estadoSelect} >
                   {
@@ -316,7 +340,7 @@ const eliminar = async(event)=>{
                   }
                 </Form.Select>
               </Form.Group>
-              <Form.Group>
+              <Form.Group className='col-md-6'>
                 <Form.Label>Producto</Form.Label>
                 <Form.Select aria-label="Seleccionar nombre del producto" onChange={(e)=>setproductoSelect(e.target.value)} value={productoSelect}>
                   {
@@ -328,16 +352,24 @@ const eliminar = async(event)=>{
                   }
                 </Form.Select>
               </Form.Group>
-              <Form.Group>
-                <Form.Label>Pagado</Form.Label>
-                <Form.Control type='text' className='form-control required' placeholder='Si' value='si' readOnly/>
-              </Form.Group>
-              <Form.Group className='col-md-2'>
+              <Form.Group className='col-md-6'>
+                    <Form.Label>Pagado</Form.Label>
+                    <Form.Select aria-label="Estado de pago" onChange={(e)=>setpagadoSelect(e.target.value)} >
+                    {
+                        pagado.map(pagado =>(
+                        <option key={pagado}>
+                            {pagado}
+                        </option>
+                    ))
+                    }
+                    </Form.Select>
+                </Form.Group>
+              <Form.Group style={{display: 'inline-block', width: '80px'}}>
                 <Button type='button' variant="secondary" onClick={handleClose}>
                   Cerrar
                 </Button>
               </Form.Group>
-              <Form.Group className='col-md-1'>
+              <Form.Group style={{display: 'inline-block', width: '80px'}}>
                 <Button type='submit' variant="primary">
                     Guardar
                 </Button>
@@ -356,7 +388,7 @@ const eliminar = async(event)=>{
     </Modal.Header>
 
     <Modal.Body>
-        <p>¿Estas seguro que deseas eliminar este producto?</p>
+        <p>¿Estas seguro que deseas eliminar este pedido?</p>
     </Modal.Body>
 
     <Modal.Footer>

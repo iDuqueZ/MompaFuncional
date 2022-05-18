@@ -1,7 +1,7 @@
 //Creamos base de datos
 const mongoose = require('mongoose')
 
-URI = ("mongodb://localhost/bdMompa");
+URI = ("mongodb+srv://iDuquez:AutonomaChantilly@cluster0.hi0pf.mongodb.net/bdMompa?retryWrites=true&w=majority");
 
 mongoose.connect(URI, {
     useNewUrlParser: true,

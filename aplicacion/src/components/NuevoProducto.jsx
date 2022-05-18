@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import ListAdmin from './ListAdmin'
+import NavBarAdmin from './NavBarAdmin'
 import {Button} from 'react-bootstrap'
 import Swal from 'sweetalert2'
 import axios from 'axios'
@@ -20,7 +20,7 @@ export default function NuevoProducto() {
 
 
     useEffect(()=>{
-        setestado(['Dsiponible', 'No Disponible'])
+        setestado(['Disponible', 'No Disponible'])
         setestadoSelect('Disponible');
 
         setcategoria(['vestidos', 'camisas', 'gorros', 'turbantes', 'gafas', 'pride', 'cabello', 'accesorios'])
@@ -111,6 +111,24 @@ export default function NuevoProducto() {
                 timer: '1500'
             })
         }
+        else if(cantidad === 0 && estadoSelect === 'Disponible'){
+            Swal.fire({
+                icon: 'error',
+                title: 'Si la cantidad es 0 el estado no puede ser',
+                showConfirmButton: false,
+                timer: '1500'
+            })
+        }
+
+        else if(linkCompra === ""){
+            Swal.fire({
+                icon: 'error',
+                title: 'Debe ingresar un enlace de compra',
+                showConfirmButton: false,
+                timer: '1500'
+            })
+        }
+        
 
         else {
             const token = sessionStorage.getItem('token');
@@ -133,16 +151,19 @@ export default function NuevoProducto() {
 
         }
     }
+
+    const atras = async(e) => {
+        e.preventDefault()
+        window.location.href = '/Inventario'
+    }
+
     return (
         <div className='grande'>
-            <div className='encabezado'>
-                <h3>INVENTARIO</h3>
+            <div className='nav'>
+                <NavBarAdmin/>
             </div>
         <div className='gran-contenedor'>
-            <div className='menu'>
-                <br/><br></br>
-                <ListAdmin />
-            </div>
+        
             <div className='cajones2'>
                 <div className='cajon-inferior'>
                     <div className='card-body'>
@@ -150,12 +171,12 @@ export default function NuevoProducto() {
                         <form onSubmit={guardar}>
                             <div className='row'>
                                 <div className='col-md-6'>
-                                    <label>Nombre de producto</label>
+                                    <label>Nombre de producto *</label>
                                     <input type='text' className='form-control required' placeholder='Digita el nombre ej: Collar de conchas' onChange={(e)=>setname(e.target.value)}/>
                                 </div>
 
                                 <div className='col-md-6'>
-                                    <label>Categoria</label>
+                                    <label>Categoría *</label>
                                     
 
                                     <select className='form-control required' placeholder='Digita el precio en numeros' onChange={(e)=>setcategoriaSelect(e.target.value)}>
@@ -170,14 +191,14 @@ export default function NuevoProducto() {
                                 </div>
 
                                 <div className='col-md-6'>
-                                    <label>Precio</label>
+                                    <label>Precio *</label>
                                     <input type='Number' className='form-control required' placeholder='Digita el precio en numeros' onChange={(e)=>setprecio(e.target.value)}/>
                                 </div>
 
                                 
 
                                 <div className='col-md-6'>
-                                    <label>Estado</label>
+                                    <label>Estado *</label>
                                     <select className='form-control required' placeholder='Digita el precio en numeros' onChange={(e)=>setestadoSelect(e.target.value)}>
                                         {
                                             estado.map(estado =>(
@@ -190,18 +211,18 @@ export default function NuevoProducto() {
                                 </div>
 
                                 <div className='col-lg-10'>
-                                    <label>Link de imagen</label>
+                                    <label>Link de imagen *</label>
                                     <input type='text' className='form-control required' placeholder='Digita el link de la imagen' onChange={(e)=>setimagen(e.target.value)}/>
                                 </div>
 
                                 <div className='col-md-2'>
-                                    <label>Cantidad</label>
-                                    <input type='Number' className='form-control required' placeholder='Digita el precio en numeros' onChange={(e)=>setcantidad(e.target.value)}/>
+                                    <label>Cantidad *</label>
+                                    <input type='Number' className='form-control required' placeholder='Digita la cantidad en numeros' onChange={(e)=>setcantidad(e.target.value)}/>
                                 </div>
 
                                 <div className='col-lg-12'>
-                                    <label>Link de Compra</label>
-                                    <input type='text' className='form-control required' placeholder='Digita el link de la imagen' onChange={(e)=>setlinkCompra(e.target.value)}/>
+                                    <label>Link de Compra *</label>
+                                    <input type='text' className='form-control required' placeholder='Digita el link de compra del producto' onChange={(e)=>setlinkCompra(e.target.value)}/>
                                 </div>
 
                                 <div className='col-lg-12'>
@@ -209,8 +230,11 @@ export default function NuevoProducto() {
                                     <textarea type='text' className='form-control required'placeholder='Auí puedes escribir los detalles del producto' onChange={(e)=>setdescripcion(e.target.value)}></textarea>
                                 </div>
                             </div>
-                            <Button variant="primary" type="submit">
-                                Submit
+                            <Button variant="primary" type="submit" style={{display: 'inline-block', width: '80px'}}>
+                                Guardar
+                            </Button>
+                            <Button type='button' onClick={atras} variant="secondary" style={{display: 'inline-block', width: '80px', marginLeft: '10px'}}>
+                                Volver
                             </Button>
                         </form>     
                     </div>

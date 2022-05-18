@@ -13,7 +13,7 @@ export default function Productos() {
     const [estadoSelect, setestadoSelect] = useState  ([]);
     const [descripcion, setdescripcion] = useState  ('');
     const [cantidad, setcantidad] = useState  ('');
-    const [linkCompra, setlinkCompra] = useState ('');
+    const [id, setId] = useState ('')
 
 
   const [show, setShow] = useState(false);
@@ -62,17 +62,20 @@ const obtenerProducto = (idParametro) => async(event)=>{
   setestadoSelect(respuesta.data.estado)
   setimagen(respuesta.data.imagen)
   setcantidad(respuesta.data.cantidad)
-  setlinkCompra(respuesta.data.linkCompra)
+  setId (respuesta.data._id)
 
   setShow(true);
 } 
 
 
 const pay = async(event)=>{
- event.preventDefault();
- sessionStorage.setItem('nameProducto', name)
-  window.location.href = linkCompra
-  console.log(linkCompra)
+  event.preventDefault();
+  window.location.href = '/pago?de=' + id;
+}
+
+const hablarAsesor = async (e) => {
+  e.preventDefault();
+  window.location.href = 'https://wa.me/message/UFML5BY7GHY5M1';
 }
 
   return (
@@ -81,7 +84,7 @@ const pay = async(event)=>{
     {Array.from(productos).map((producto) => (
       <Col>
         <Card onClick={obtenerProducto(producto._id)} className='Card' style={{width: '14rem', margin: 'auto'}}>
-          <Card.Img style={{sobjectFit: 'cover', backgroundSize: 'cover'}} variant="top" src={producto.imagen} />
+          <Card.Img style={{objectFit: 'cover', backgroundSize: 'cover'}} variant="top" src={producto.imagen} />
           {console.log(producto.imagen)}
           <Card.Body>
             <Card.Title>{producto.name}</Card.Title>
@@ -122,9 +125,22 @@ const pay = async(event)=>{
           <Button variant="secondary" onClick={handleClose}>
             Cerrar
           </Button>
-          <Button variant="primary" onClick={pay}>
-            Comprar
-          </Button>
+          {(() => {
+            if (estadoSelect === 'No Disponible') {
+              return (
+                <Button variant="primary" onClick={hablarAsesor}>
+                  Hablar con un asesor
+                </Button>
+              )
+            } else {
+              return (
+                <Button variant="primary" onClick={pay}>
+                  Comprar
+                </Button>
+              )
+            }
+          })()}
+          
         </Modal.Footer>
       </Modal>
   </div>

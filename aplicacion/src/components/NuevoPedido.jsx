@@ -12,11 +12,14 @@ export default function NuevoPedido(){
   const [ciudad, setciudad] = useState ('');  
   const [telefono, setTelefono] = useState('');
   const [fecha, setFecha] = useState('');
+  const [metodoPago, setmetodoPago] = useState([]);
+  const [metodoPagoSelect, setmetodoPagoSelect] = useState([]);
   const [estado, setestado] = useState  ([]);
   const [estadoSelect, setestadoSelect] = useState  ([]);
   const [producto, setproducto] = useState([]);
   const [productoSelect, setproductoSelect] = useState([]);
-  const [pagado,setpagado] = useState ('');
+  const [pagado,setpagado] = useState ([]);
+  const [pagadoSelect,setpagadoSelect] = useState ([]);
 
   useEffect(()=>{
     obtenerNombresProductos();
@@ -27,7 +30,11 @@ export default function NuevoPedido(){
     setproducto(['Ninguno'])
     setproductoSelect('Ninguno')
 
-    setpagado(true)
+    setpagado(['En espera', 'Confirmado', 'Fallido'])
+    setpagadoSelect('En espera')
+
+    setmetodoPago(['Contra entrega', 'En linea'])
+    setmetodoPagoSelect('Contra entrega')
     // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
 
@@ -57,9 +64,10 @@ export default function NuevoPedido(){
         ciudad,
         telefono,
         fecha,
+        metodoPago: metodoPagoSelect,
         estado: estadoSelect,
         producto: productoSelect,
-        pagado
+        pagado: pagadoSelect,
     }
     
     if(name === ""){
@@ -101,11 +109,19 @@ export default function NuevoPedido(){
     else if (telefono === ""){
       Swal.fire({
         icon: 'error',
-        title: 'Debe ingresar un número telefonico',
+        title: 'Debe ingresar un número telefónico',
         showConfirmButton: false,
         timer: '1500'
       })
     }
+    else if (fecha === ''){
+        Swal.fire({
+          icon: 'error',
+          title: 'Debe ingresar una fecha',
+          showConfirmButton: false,
+          timer: '1500'
+        })
+      }
   
     else if (telefono < 0){
       Swal.fire({
@@ -114,7 +130,14 @@ export default function NuevoPedido(){
         showConfirmButton: false,
         timer: '1500'
       })
-    }
+    }else if (!/^[0-9]+$/.test(telefono)){
+        Swal.fire({
+          icon: 'error',
+          title: 'Número telefonico no valido',
+          showConfirmButton: false,
+          timer: '1500'
+        })
+      }
 
     else {
         const token = sessionStorage.getItem('token');
@@ -156,27 +179,27 @@ const atras = async(e) => {
             <div className='card-body'>
                 <Form onSubmit={guardar} className='row'>
                 <Form.Group className='col-md-6'>
-                    <Form.Label>Nombre</Form.Label>
+                    <Form.Label>Nombre *</Form.Label>
                     <Form.Control type='text' className='form-control required' placeholder='Digita el nombre del remitente' onChange={(e)=>setname(e.target.value)}/>
                 </Form.Group>
                 <Form.Group className='col-md-6'>
-                    <Form.Label>Dirección</Form.Label>
+                    <Form.Label>Dirección *</Form.Label>
                     <Form.Control type='text' className='form-control required' placeholder='Digita la dirección de envio' onChange={(e)=>setdireccion(e.target.value)}/>
                 </Form.Group>
                 <Form.Group className='col-md-6'>
-                    <Form.Label>Ciudad</Form.Label>
+                    <Form.Label>Ciudad *</Form.Label>
                     <Form.Control type='text' className='form-control required' placeholder='Digita la ciudad de destino' onChange={(e)=>setciudad(e.target.value)}/>
                 </Form.Group>
                 <Form.Group className='col-md-6'>
-                    <Form.Label>Correo</Form.Label>
+                    <Form.Label>Correo *</Form.Label>
                     <Form.Control type='email' className='form-control required' placeholder='Digita el correo' onChange={(e)=>setcorreo(e.target.value)}/>
                 </Form.Group>
                 <Form.Group className='col-md-6'>
-                    <Form.Label>Celular</Form.Label>
-                    <Form.Control type='number' className='form-control required' placeholder='Digita el numero de celular de contacto' onChange={(e)=>setTelefono(e.target.value)}/>
+                    <Form.Label>Celular *</Form.Label>
+                    <Form.Control type='number' className='form-control required' placeholder='Digita el número de celular de contacto' pattern="^[0-9,$]*$" onChange={(e)=>setTelefono(e.target.value)}/>
                 </Form.Group>
                 <Form.Group className='col-md-6'>
-                    <Form.Label>Fecha</Form.Label>
+                    <Form.Label>Fecha *</Form.Label>
                     <Form.Control type='date' className='form-control required' placeholder='Digita el numero de celular de contacto' onChange={(e)=>setFecha(e.target.value)}/>
                 </Form.Group>
                 <Form.Group className='col-md-6'>
@@ -191,7 +214,8 @@ const atras = async(e) => {
                     }
                     </Form.Select>
                 </Form.Group>
-                <Form.Group>
+                
+                <Form.Group className='col-md-6'>
                     <Form.Label>Producto</Form.Label>
                     <Form.Select aria-label="Seleccionar nombre del producto" onChange={(e)=>setproductoSelect(e.target.value)}>
                     {
@@ -203,11 +227,31 @@ const atras = async(e) => {
                     }
                     </Form.Select>
                 </Form.Group>
-                <Form.Group>
-                    <Form.Label>Pagado</Form.Label>
-                    <Form.Control type='text' className='form-control required' placeholder='Si' value='si' readOnly/>
+                <Form.Group className='col-md-6'>
+                    <Form.Label>Método de Pago</Form.Label>
+                    <Form.Select aria-label="Estado de pago" onChange={(e)=>setmetodoPagoSelect(e.target.value)} >
+                    {
+                        metodoPago.map(metodoPago =>(
+                        <option key={metodoPago}>
+                            {metodoPago}
+                        </option>
+                    ))
+                    }
+                    </Form.Select>
                 </Form.Group>
-
+                <Form.Group className='col-md-6'>
+                    <Form.Label>Pagado</Form.Label>
+                    <Form.Select aria-label="Estado de pago" onChange={(e)=>setpagadoSelect(e.target.value)} >
+                    {
+                        pagado.map(pagado =>(
+                        <option key={pagado}>
+                            {pagado}
+                        </option>
+                    ))
+                    }
+                    </Form.Select>
+                </Form.Group>
+                <Form.Group></Form.Group>
                 <Form.Group className='col-md-1'>
                     <Button type='submit' variant="primary">
                         Agregar

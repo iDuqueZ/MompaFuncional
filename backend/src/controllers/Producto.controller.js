@@ -65,4 +65,13 @@ ProductoCtrl.actualizar= async(req,res)=>{
     })
 }
 
+ProductoCtrl.actualizarEstado= async(req,res)=>{
+    const id = req.params.id
+    const respuesta = await Producto.findByIdAndUpdate({_id:id}, req.body)
+    res.json({
+        mensaje: 'Producto actualizado',
+        respuesta
+    })
+}
+
 module.exports= ProductoCtrl
